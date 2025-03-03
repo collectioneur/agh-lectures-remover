@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "AGH Lectures Remover",
+  "version": "1.0",
+  "action": {
+    "default-state": "disabled"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.usos.agh.edu.pl/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["switch.html"],
+      "matches": ["*://*.usos.agh.edu.pl/*"]
+    }
+  ],
+  "permissions": ["storage"]
+}

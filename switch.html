@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 24px;
+      }
+      .switch input {
+        display: none;
+      }
+      .slider {
+        border-radius: 3px;
+        position: absolute;
+        cursor: pointer;
+        background-color: #ccc;
+        transition: 0.2s;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.2s;
+        border-radius: 3px;
+      }
+      input:checked + .slider {
+        background-color: #4f4c6a;
+      }
+      input:checked + .slider:before {
+        transform: translateX(16px);
+      }
+      .options {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="options">
+      <span>Wykłady</span>
+      <label class="switch">
+        <input type="checkbox" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </body>
+</html>
