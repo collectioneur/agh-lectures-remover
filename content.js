@@ -5,7 +5,6 @@ chrome.storage.sync.get("switchState", (result) => {
 });
 
 applyCustomStyles = () => {
-  console.log("applying custom styles");
   const style = document.createElement("style");
   style.id = "custom-switch-styles";
   style.innerHTML = `timetable-entry[color="6"] {
@@ -99,4 +98,24 @@ if (
         containerToInsert.insertBefore(bodyElements, children[0]);
       }
     });
+}
+
+if (window.location.href.includes("kontroler.php?_action=home/index")) {
+  let containers = document.querySelectorAll("timetable-entry");
+  for (const container of containers) {
+    const text = container.querySelector("div").innerText;
+    if (text === "WF" || text === "LEKT" || text === "ZS") {
+      container.style.setProperty("display", "block", "important");
+    }
+  }
+}
+
+if (window.location.href.includes("kontroler.php?_action=home/plan")) {
+  let containers = document.querySelectorAll("timetable-entry");
+  for (const container of containers) {
+    const text = container.querySelector("div").innerText;
+    if (text.includes("ZS")) {
+      container.style.setProperty("display", "block", "important");
+    }
+  }
 }
