@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <style>
+      .body {
+        font-family: Arial, sans-serif !important;
+        color: #4f4c6a !important;
+        background-color: white !important;
+        margin-bottom: 12px;
+      }
       .switch {
         position: relative;
         display: inline-block;
@@ -45,15 +51,173 @@
         align-items: center;
         gap: 12px;
       }
+
+      .input-group {
+        display: flex;
+        align-items: start;
+        gap: 12px;
+        margin-top: 4px;
+        font-family: Arial, sans-serif !important;
+        /* flex-wrap: wrap; */
+      }
+      .input-container {
+        position: relative;
+      }
+      .custom-input {
+        border: 1px solid #4f4c6a;
+        border-radius: 3px;
+        font-size: 16px !important;
+        color: #4f4c6a;
+        position: relative;
+        z-index: 110;
+      }
+      .custom-input::placeholder {
+        font-size: 16px !important;
+      }
+      .pluss-button {
+        width: 24px !important;
+        min-width: 24px;
+        height: 24px !important;
+        border: none;
+        background-color: #4f4c6a;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .pluss-button:hover {
+        opacity: 0.8;
+      }
+      .pluss-button:active {
+        transform: scale(0.9);
+      }
+      .pluss-button img {
+        width: 12px;
+        height: 12px;
+      }
+      .blocks-container {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+      .blockk {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 24px;
+        padding: 0 12px;
+        background-color: #4f4c6a;
+        color: white;
+        border-radius: 3px;
+      }
+      .close {
+        cursor: pointer;
+        width: 9px;
+        height: 9px;
+      }
+
+      .close:hover {
+        opacity: 0.8;
+      }
+
+      .close:active {
+        transform: scale(0.9);
+      }
+
+      .suggestions-container {
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid #4f4c6a;
+        border-radius: 3px;
+        top: 110%;
+        left: 0;
+        box-sizing: border-box;
+        display: none;
+      }
+
+      .suggestion {
+        padding: 2px 2px;
+        cursor: pointer;
+        border-bottom: 1px solid #4f4c6a;
+        transition: all 0.2s ease;
+      }
+
+      .suggestion:hover {
+        background-color: #4f4c6a;
+        color: white;
+      }
+
+      .suggestion:active {
+        transform: scale(0.9);
+      }
+
+      .suggestion:last-child {
+        border-bottom: none;
+      }
     </style>
   </head>
   <body>
-    <div class="options">
-      <span>Wykłady</span>
-      <label class="switch">
-        <input type="checkbox" />
-        <span class="slider"></span>
-      </label>
+    <div class="body">
+      <div class="options">
+        <span>Wykłady</span>
+        <label class="switch">
+          <input type="checkbox" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div style="margin-top: 12px; font-weight: bold" class="wyjatki">
+        Wyjątki
+      </div>
+      <div class="input-group">
+        <div class="input-container">
+          <input
+            type="text"
+            class="custom-input"
+            placeholder="Nazwa przedmiotu"
+          />
+          <div class="suggestions-container" id="suggestionsContainer"></div>
+        </div>
+        <button class="pluss-button" id="adddButton">
+          <img src="icons/plus.png" alt="plus" />
+        </button>
+        <div class="blocks-container" id="blocksContainer"></div>
+      </div>
     </div>
+    <script>
+      const addButton = document.getElementById("adddButton");
+      const inputField = document.querySelector(".custom-input");
+      const blocksContainer = document.getElementById("blocksContainer");
+
+      addButton.addEventListener("click", () => {
+        const text = inputField.value.trim();
+        if (text !== "") {
+          const block = document.createElement("div");
+          block.className = "blockk";
+
+          const textElement = document.createElement("span");
+          textElement.className = "block-text";
+          textElement.textContent = text;
+          const closeElement = document.createElement("img");
+          closeElement.src = "icons/cross.png";
+          closeElement.alt = "close";
+          closeElement.className = "close";
+          block.appendChild(textElement);
+          block.appendChild(closeElement);
+
+          blocksContainer.appendChild(block);
+          inputField.value = "";
+
+          closeElement.addEventListener("click", () => {
+            blocksContainer.removeChild(block);
+          });
+        }
+      });
+    </script>
   </body>
 </html>

@@ -21,6 +21,10 @@
     {
       "resources": ["switch.html"],
       "matches": ["*://*.usos.agh.edu.pl/*"]
+    },
+    {
+      "resources": ["icons/plus.png", "icons/cross.png"],
+      "matches": ["*://*.usos.agh.edu.pl/*"]
     }
   ],
   "permissions": ["storage"]
